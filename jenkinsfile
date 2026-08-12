@@ -1,56 +1,71 @@
+pipeline { 
 
-pipeline {
+    agent any 
 
-    agent any
+    stages { 
 
-    stages {
+        stage('Verify Application Files') { 
 
-        stage('Verify Application Files') {
+            steps { 
 
-            steps {
+                echo 'Verifying project files...' 
 
-                echo 'Verifying project files...'
+ 
 
-                bat 'if exist calculator.py (echo calculator.py Found) else (exit 1)'
+ 
 
-                bat 'if exist requirements.txt (echo requirements.txt Found) else (exit 1)'
+ 
 
-                bat 'if exist README.md (echo README.md Found) else (exit 1)'
+                bat 'if exist README.md (echo README>md Found) else (exit 1)' 
 
-                bat 'if exist test_calculator (1).py (echo Test file Found) else (exit 1)'
-            }
-        }
+                bat 'if exist calculator.py (echo calculator.py Found) else (exit 1)' 
 
-        stage('Create Build Artifact') {
+                bat 'if exist requirements.txt (echo requirements.txt Found) else (exit 1)' 
 
-            steps {
+            } 
 
-                echo 'Creating ZIP file...'
+        } 
 
-                bat 'powershell Compress-Archive -Path * -DestinationPath StudentManagementSystem.zip -Force'
-            }
-        }
+        stage('Create Build Artifact') { 
 
-        stage('Archive Build') {
+            steps { 
 
-            steps {
+                echo 'Creating ZIP file...' 
 
-                archiveArtifacts artifacts: 'StudentManagementSystem.zip', fingerprint: true
-            }
-        }
-    }
+     bat 'powershell Compress-Archive -Path * -DestinationPath  StudentManagementSystem.zip -Force' 
 
-    post {
+            } 
 
-        success {
+        } 
 
-            echo 'Application Build Successful.'
-        }
+        stage('Archive Build') { 
 
-        failure {
+            steps { 
 
-            echo 'Application Build Failed.'
-        }
-    }
-}
+                archiveArtifacts artifacts: 'StudentManagementSystem.zip', fingerprint: true 
 
+            } 
+
+        } 
+
+    } 
+
+ 
+
+    post { 
+
+        success { 
+
+            echo 'Application Build Successful.' 
+
+        } 
+
+        failure { 
+
+            echo 'Application Build Failed.' 
+
+        } 
+
+    } 
+
+} 
