@@ -17,7 +17,7 @@ pipeline {
 
                 bat 'if exist README.md (echo README.md Found) else (exit 1)'
 
-                bat 'if exist "test_calculator (1).py" (echo Test file Found) else (exit 1)'
+                bat 'if exist test_calculator (1).py (echo Test file Found) else (exit 1)'
             }
         }
 
